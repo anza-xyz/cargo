@@ -1130,7 +1130,7 @@ pub enum E {
 fn main() {
     use updated_crate::E;
     let x = E::Variant1;
-    match x { // Error: `E::Variant2` not covered
+    match x { // Error: non-exhaustive patterns: `E::Variant2` not covered
         E::Variant1 => {}
     }
 }
