@@ -111,7 +111,13 @@ fn basic() {
         // Importantly, this should not say [UPDATING]
         // There have been multiple bugs where every build triggers and update.
         .with_stderr(
-            "[COMPILING] foo v0.0.1 [..]\n\
+            "[UPDATING] git repository `https://github.com/solana-labs/compiler-builtins`\n\
+             warning: Patch `compiler_builtins v0.1.88 (https://github.com/solana-labs/compiler-builtins?tag=solana-tools-v1.36#e6395414)` was not used in the crate graph.\n\
+             Check that the patched package version and available features are compatible\n\
+             with the dependency requirements. If the patch has a different version from\n\
+             what is locked in the Cargo.lock file, run `cargo update` to use the new\n\
+             version. This may also occur with an optional dependency that is not enabled.\n\
+             [COMPILING] foo v0.0.1 [..]\n\
              [FINISHED] dev [..]",
         )
         .run();
