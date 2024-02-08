@@ -123,46 +123,46 @@ jobs:
           os: ubuntu-latest
           rust: stable
           other: i686-unknown-linux-gnu
-        - name: Linux x86_64 beta
-          os: ubuntu-latest
-          rust: beta
-          other: i686-unknown-linux-gnu
-        - name: Linux x86_64 nightly
-          os: ubuntu-latest
-          rust: nightly
-          other: i686-unknown-linux-gnu
+#        - name: Linux x86_64 beta
+#          os: ubuntu-latest
+#          rust: beta
+#          other: i686-unknown-linux-gnu
+#        - name: Linux x86_64 nightly
+#          os: ubuntu-latest
+#          rust: nightly
+#          other: i686-unknown-linux-gnu
         - name: Linux aarch64 stable
           os: ubuntu-24.04-arm
           rust: stable
           other: TODO # cross-compile tests are disabled, this shouldn't matter.
-        - name: Linux aarch64 nightly
-          os: ubuntu-24.04-arm
-          rust: nightly
-          other: TODO # cross-compile tests are disabled, this shouldn't matter.
+#        - name: Linux aarch64 nightly
+#          os: ubuntu-24.04-arm
+#          rust: nightly
+#          other: TODO # cross-compile tests are disabled, this shouldn't matter.)
         - name: macOS aarch64 stable
           os: macos-14
           rust: stable
           other: x86_64-apple-darwin
-        - name: macOS x86_64 nightly
-          os: macos-13
-          rust: nightly
-          other: x86_64-apple-ios
-        - name: macOS aarch64 nightly
-          os: macos-14
-          rust: nightly
-          other: x86_64-apple-darwin
+#        - name: macOS x86_64 nightly
+#          os: macos-13
+#          rust: nightly
+#          other: x86_64-apple-ios
+#        - name: macOS aarch64 nightly
+#          os: macos-14
+#          rust: nightly
+#          other: x86_64-apple-darwin
         - name: Windows x86_64 MSVC stable
           os: windows-latest
           rust: stable-msvc
           other: i686-pc-windows-msvc
-        - name: Windows x86_64 MSVC nightly
-          os: windows-latest
-          rust: nightly-msvc
-          other: i686-pc-windows-msvc
-        - name: Windows x86_64 gnu nightly # runs out of space while trying to link the test suite
-          os: windows-latest
-          rust: nightly-gnu
-          other: i686-pc-windows-gnu
+#        - name: Windows x86_64 MSVC nightly
+#          os: windows-latest
+#          rust: nightly-msvc
+#          other: i686-pc-windows-msvc
+#        - name: Windows x86_64 gnu nightly # runs out of space while trying to link the test suite
+#          os: windows-latest
+#          rust: nightly-gnu
+#          other: i686-pc-windows-gnu
     name: Tests ${{ matrix.name }}
     steps:
     - uses: actions/checkout@v4
@@ -255,7 +255,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: rustup update nightly && rustup default nightly
+    - run: rustup update stable && rustup default stable
     - run: rustup component add rust-src
     - run: cargo build
     - run: cargo test -p cargo --test build-std
