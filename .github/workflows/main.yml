@@ -98,7 +98,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: rustup update stable && rustup default stable
+      - run: rustup toolchain install 1.75.0 && rustup default 1.75.0
       - name: Install cargo-semver-checks
         run: |
           mkdir installed-bins
@@ -121,7 +121,7 @@ jobs:
         include:
         - name: Linux x86_64 stable
           os: ubuntu-latest
-          rust: stable
+          rust: 1.75.0
           other: i686-unknown-linux-gnu
 #        - name: Linux x86_64 beta
 #          os: ubuntu-latest
@@ -141,7 +141,7 @@ jobs:
 #          other: TODO # cross-compile tests are disabled, this shouldn't matter.)
         - name: macOS aarch64 stable
           os: macos-14
-          rust: stable
+          rust: 1.79.0
           other: x86_64-apple-darwin
 #        - name: macOS x86_64 nightly
 #          os: macos-13
@@ -153,7 +153,7 @@ jobs:
 #          other: x86_64-apple-darwin
         - name: Windows x86_64 MSVC stable
           os: windows-latest
-          rust: stable-msvc
+          rust: 1.75.0-msvc
           other: i686-pc-windows-msvc
 #        - name: Windows x86_64 MSVC nightly
 #          os: windows-latest
@@ -242,7 +242,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: rustup update --no-self-update stable && rustup default stable
+      - run: rustup toolchain install 1.75.0 && rustup default 1.75.0
       - run: rustup target add i686-unknown-linux-gnu
       - run: rustup target add wasm32-unknown-unknown
       - run: sudo apt update -y && sudo apt install gcc-multilib libsecret-1-0 libsecret-1-dev -y
@@ -293,4 +293,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: taiki-e/install-action@cargo-hack
-    - run: cargo hack check --all-targets --rust-version --workspace --ignore-private --locked
+    - run: cargo hack check --all-targets --workspace --ignore-private --locked
