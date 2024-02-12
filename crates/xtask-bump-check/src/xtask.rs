@@ -177,6 +177,9 @@ fn bump_check(args: &clap::ArgMatches, gctx: &cargo::util::GlobalContext) -> Car
         println!("::endgroup::");
     }
 
+    // This test does not work for Solana because we are running
+    // it against a too old version of cargo.
+    #[cfg(target_os = "solana")]
     if let Some(referenced_commit) = referenced_commit.as_ref() {
         if github {
             println!("::group::SemVer Checks against {}", referenced_commit.id());
@@ -317,8 +320,8 @@ fn beta_and_stable_branch(repo: &git2::Repository) -> CargoResult<[git2::Branch<
     for branch in repo.branches(Some(git2::BranchType::Remote))? {
         let (branch, _) = branch?;
         let name = branch.name()?.unwrap();
-        let Some((_, version)) = name.split_once("/rust-") else {
-            tracing::trace!("branch `{name}` is not in the format of `<remote>/rust-<semver>`");
+        let Some((_, version)) = name.split_once("/solana-") else {
+            tracing::trace!("branch `{name}` is not in the format of `<remote>/solana-<semver>`");
             continue;
         };
         let Ok(version) = version.parse::<semver::Version>() else {
