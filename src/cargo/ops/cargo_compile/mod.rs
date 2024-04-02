@@ -521,7 +521,10 @@ pub fn create_bcx<'a, 'cfg>(
 
             anyhow::bail!(
                 "package `{}` cannot be built because it requires rustc {} or newer, \
-                 while the currently active rustc version is {}\n{}",
+                 while the currently active rustc version is {}\n\
+                 Note that this is the rustc version that ships with Solana tools and \
+                 not your system's rustc version. Use `solana-install update` or head \
+                 over to https://docs.solanalabs.com/cli/install to install a newer version.\n{}",
                 unit.pkg,
                 version,
                 current_version,
