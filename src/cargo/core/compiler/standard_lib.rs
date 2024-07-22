@@ -91,8 +91,8 @@ pub fn resolve_std<'gctx>(
         "compiler_builtins",
         None,
         SourceId::for_git(
-            &("https://github.com/solana-labs/compiler-builtins".parse()).unwrap(),
-            GitReference::Tag("solana-tools-v1.40".to_string()),
+            &("https://github.com/anza-xyz/compiler-builtins".parse()).unwrap(),
+            GitReference::Tag("solana-tools-v1.43".to_string()),
         )?,
     )?);
     let crates_io_url = crate::sources::CRATES_IO_INDEX.parse().unwrap();
