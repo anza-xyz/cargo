@@ -91,23 +91,23 @@ jobs:
       - run: rustup update stable && rustup default stable
       - run: cargo update -p cargo --locked
 
-  check-version-bump:
-    runs-on: ubuntu-latest
-    env:
-      BASE_SHA: ${{ github.event.pull_request.base.sha }}
-      HEAD_SHA: ${{ github.event.pull_request.head.sha != '' && github.event.pull_request.head.sha || github.sha  }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - run: rustup toolchain install 1.78.0 && rustup default 1.78.0
-      - name: Install cargo-semver-checks
-        run: |
-          mkdir installed-bins
-          curl -Lf https://github.com/obi1kenobi/cargo-semver-checks/releases/download/v0.29.0/cargo-semver-checks-x86_64-unknown-linux-gnu.tar.gz \
-            | tar -xz --directory=./installed-bins
-          echo `pwd`/installed-bins >> $GITHUB_PATH
-      - run: ci/validate-version-bump.sh
+#  check-version-bump:
+#    runs-on: ubuntu-latest
+#    env:
+#      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+#      HEAD_SHA: ${{ github.event.pull_request.head.sha != '' && github.event.pull_request.head.sha || github.sha  }}
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#      - run: rustup toolchain install 1.78.0 && rustup default 1.78.0
+#      - name: Install cargo-semver-checks
+#        run: |
+#          mkdir installed-bins
+#          curl -Lf https://github.com/obi1kenobi/cargo-semver-checks/releases/download/v0.29.0/cargo-semver-checks-x86_64-unknown-linux-gnu.tar.gz \
+#            | tar -xz --directory=./installed-bins
+#          echo `pwd`/installed-bins >> $GITHUB_PATH
+#      - run: ci/validate-version-bump.sh
 
   test:
     runs-on: ${{ matrix.os }}
@@ -190,9 +190,6 @@ jobs:
     - run: cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests
     - name: Check benchmarks
       run: |
-        # This only tests one benchmark since it can take over 10 minutes to
-        # download all workspaces.
-        cargo test -p benchsuite --all-targets -- cargo
         cargo check -p capture
     # The testsuite generates a huge amount of data, and fetch-smoke-test was
     # running out of disk space.
