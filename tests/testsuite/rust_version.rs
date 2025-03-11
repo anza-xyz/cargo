@@ -112,9 +112,7 @@ fn lint_self_incompatible_with_rust_version() {
         .with_stderr_data(str![[r#"
 [ERROR] rustc [..] is not supported by the following package:
 
-                 Note that this is the rustc version that ships with Solana tools and \
-                 not your system's rustc version. Use `solana-install update` or head \
-                 over to https://docs.solanalabs.com/cli/install to install a newer version.
+                 Note that this is the rustc version that ships with Solana tools and not your system's rustc version. Use `solana-install update` or head over to https://docs.solanalabs.com/cli/install to install a newer version.
   foo@0.0.1 requires rustc 1.9876.0
 
 
@@ -175,10 +173,7 @@ fn lint_dep_incompatible_with_rust_version() {
 [DOWNLOADED] rustc_compatible v0.0.1 (registry `dummy-registry`)
 [ERROR] rustc [..] is not supported by the following packages:
 
-                 Note that this is the rustc version that ships with Solana \
-                 tools and not your system's rustc version. Use `solana-install \
-                 update` or head over to https://docs.solanalabs.com/cli/install \
-                 to install a newer version.
+                 Note that this is the rustc version that ships with Solana tools and not your system's rustc version. Use `solana-install update` or head over to https://docs.solanalabs.com/cli/install to install a newer version.
   too_new_child@0.0.1 requires rustc 1.2345.0
   too_new_parent@0.0.1 requires rustc 1.2345.0
 Either upgrade rustc or select compatible dependency versions with

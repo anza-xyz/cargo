@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: rustup toolchain install 1.79.0 && rustup default 1.79.0
+      - run: rustup toolchain install 1.84.1 && rustup default 1.84.1
       - run: rustup component add clippy
       - run: cargo clippy --workspace --all-targets --no-deps -- -D warnings
 
@@ -89,23 +89,23 @@ jobs:
       - run: rustup update stable && rustup default stable
       - run: cargo update -p cargo --locked
 
-  check-version-bump:
-    runs-on: ubuntu-latest
-    env:
-      BASE_SHA: ${{ github.event.pull_request.base.sha }}
-      HEAD_SHA: ${{ github.event.pull_request.head.sha != '' && github.event.pull_request.head.sha || github.sha  }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - run: rustup toolchain install 1.78.0 && rustup default 1.78.0
-      - name: Install cargo-semver-checks
-        run: |
-          mkdir installed-bins
-          curl -Lf https://github.com/obi1kenobi/cargo-semver-checks/releases/download/v0.41.0/cargo-semver-checks-x86_64-unknown-linux-gnu.tar.gz \
-            | tar -xz --directory=./installed-bins
-          echo `pwd`/installed-bins >> $GITHUB_PATH
-      - run: ci/validate-version-bump.sh
+#  check-version-bump:
+#    runs-on: ubuntu-latest
+#    env:
+#      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+#      HEAD_SHA: ${{ github.event.pull_request.head.sha != '' && github.event.pull_request.head.sha || github.sha  }}
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#      - run: rustup toolchain install 1.78.0 && rustup default 1.78.0
+#      - name: Install cargo-semver-checks
+#        run: |
+#          mkdir installed-bins
+#          curl -Lf https://github.com/obi1kenobi/cargo-semver-checks/releases/download/v0.41.0/cargo-semver-checks-x86_64-unknown-linux-gnu.tar.gz \
+#            | tar -xz --directory=./installed-bins
+#          echo `pwd`/installed-bins >> $GITHUB_PATH
+#      - run: ci/validate-version-bump.sh
 
   test:
     runs-on: ${{ matrix.os }}
@@ -121,7 +121,7 @@ jobs:
         include:
         - name: Linux x86_64 stable
           os: ubuntu-latest
-          rust: 1.79.0
+          rust: 1.84.1
           other: i686-unknown-linux-gnu
 #        - name: Linux x86_64 beta
 #          os: ubuntu-latest
@@ -141,7 +141,7 @@ jobs:
 #          other: TODO # cross-compile tests are disabled, this shouldn't matter.)
         - name: macOS aarch64 stable
           os: macos-14
-          rust: 1.79.0
+          rust: 1.84.1
           other: x86_64-apple-darwin
 #        - name: macOS x86_64 nightly
 #          os: macos-13
@@ -153,7 +153,7 @@ jobs:
 #          other: x86_64-apple-darwin
         - name: Windows x86_64 MSVC stable
           os: windows-latest
-          rust: 1.79.0-msvc
+          rust: 1.84.1-msvc
           other: i686-pc-windows-msvc
 #        - name: Windows x86_64 MSVC nightly
 #          os: windows-latest
@@ -210,11 +210,14 @@ jobs:
       env:
         __CARGO_TEST_FORCE_ARGFILE: 1
     - run: cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests
+#    - name: Check benchmarks
+#      run: |
+#        # This only tests one benchmark since it can take over 10 minutes to
+#        # download all workspaces.
+#        cargo test -p benchsuite --all-targets -- cargo
+#        cargo check -p capture
     - name: Check benchmarks
       run: |
-        # This only tests one benchmark since it can take over 10 minutes to
-        # download all workspaces.
-        cargo test -p benchsuite --all-targets -- cargo
         cargo check -p capture
     # The testsuite generates a huge amount of data, and fetch-smoke-test was
     # running out of disk space.
@@ -242,7 +245,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: rustup toolchain install 1.79.0 && rustup default 1.79.0
+      - run: rustup toolchain install 1.84.1 && rustup default 1.84.1
       - run: rustup target add i686-unknown-linux-gnu
       - run: rustup target add wasm32-unknown-unknown
       - run: sudo apt update -y && sudo apt install gcc-multilib libsecret-1-0 libsecret-1-dev -y

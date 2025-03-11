@@ -2822,6 +2822,8 @@ To reuse those artifacts with a future compilation, set the environment variable
 
 Caused by:
   rustc [..] is not supported by the following package:
+
+                   Note that this is the rustc version that ships with Solana tools and not your system's rustc version. Use `solana-install update` or head over to https://docs.solanalabs.com/cli/install to install a newer version.
     some-package-from-the-distant-future@0.1.0 requires rustc 1.2345.0
 
 "#]])

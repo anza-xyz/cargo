@@ -1934,6 +1934,8 @@ fn clean_gc_quiet_is_quiet() {
         .run();
 }
 
+#[ignore]
+// Ignoring this test since it depends on the time of a release
 #[cargo_test(requires_rustup_stable)]
 fn compatible_with_older_cargo() {
     // Ensures that db stays backwards compatible across versions.

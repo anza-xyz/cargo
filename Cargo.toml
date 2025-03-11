@@ -121,6 +121,7 @@ windows-sys = "0.59"
 
 [workspace.lints.rust]
 rust_2018_idioms = "warn" # TODO: could this be removed?
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
 
 [workspace.lints.rustdoc]
 private_intra_doc_links = "allow"
