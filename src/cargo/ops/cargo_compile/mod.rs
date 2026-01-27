@@ -510,8 +510,8 @@ pub fn create_bcx<'a, 'gctx>(
             let mut message = format!(
                 "rustc {rustc_version} is not supported by the following package{plural}:\n
                  Note that this is the rustc version that ships with Solana tools and \
-                 not your system's rustc version. Use `solana-install update` or head \
-                 over to https://docs.solanalabs.com/cli/install to install a newer version.\n",
+                 not your system's rustc version. Use `agave-install update` or head \
+                 over to https://docs.anza.xyz/cli/install to install a newer version.\n",
             );
             incompatible.sort_by_key(|(unit, _)| (unit.pkg.name(), unit.pkg.version()));
             for (unit, msrv) in incompatible {
