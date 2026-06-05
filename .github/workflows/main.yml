@@ -29,10 +29,8 @@ jobs:
       - lint-docs
       - lockfile
       - resolver
-      - report-timings
       - rustfmt
       - schema
-      - spellcheck
       - test
       - test_gitoxide
     permissions:
@@ -137,7 +135,7 @@ jobs:
         include:
         - name: Linux x86_64 stable
           os: ubuntu-latest
-          rust: 1.89.0
+          rust: 1.95.0
           other: i686-unknown-linux-gnu
 #        - name: Linux x86_64 beta
 #          os: ubuntu-latest
@@ -157,7 +155,7 @@ jobs:
 #          other: TODO # cross-compile tests are disabled, this shouldn't matter.)
         - name: macOS aarch64 stable
           os: macos-14
-          rust: 1.89.0
+          rust: 1.95.0
           other: x86_64-apple-darwin
 #        - name: macOS aarch64 nightly
 #          os: macos-14
@@ -165,7 +163,7 @@ jobs:
 #          other: x86_64-apple-darwin
         - name: Windows x86_64 MSVC stable
           os: windows-latest
-          rust: 1.89.0-msvc
+          rust: 1.95.0-msvc
           other: i686-pc-windows-msvc
 #        - name: Windows x86_64 MSVC nightly
 #          os: windows-latest
@@ -173,7 +171,7 @@ jobs:
 #          other: i686-pc-windows-msvc
         - name: Windows aarch64 MSVC stable
           os: windows-11-arm
-          rust: stable-msvc
+          rust: 1.95.0-msvc
           other: i686-pc-windows-msvc
 #        - name: Windows aarch64 MSVC nightly
 #          os: windows-11-arm
