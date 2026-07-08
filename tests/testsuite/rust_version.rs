@@ -112,7 +112,7 @@ fn lint_self_incompatible_with_rust_version() {
         .with_stderr_data(str![[r#"
 [ERROR] rustc [..] is not supported by the following package:
 
-                 This is the rustc version that ships with Solana tools and not your system's rustc version. Use `cargo install cargo-build-sbf` to install a new version. The freshly updated cargo-build-sbf may not be in use if the old Solana CLI installation directory has priority on the PATH variable.
+                 This is the rustc version that ships with Solana tools and not your system's rustc version. Use `cargo install cargo-build-sbf` to install the latest version. Ensure that the new cargo-build-sbf is used by placing the cargo install directory (typically `~/.cargo/bin`) before the Solana CLI installation directory (typically `~/.local/share/solana/install/active_release/bin`) on the `PATH` variable.
   foo@0.0.1 requires rustc 1.9876.0
 
 
@@ -173,7 +173,7 @@ fn lint_dep_incompatible_with_rust_version() {
 [DOWNLOADED] rustc_compatible v0.0.1 (registry `dummy-registry`)
 [ERROR] rustc [..] is not supported by the following packages:
 
-                 This is the rustc version that ships with Solana tools and not your system's rustc version. Use `cargo install cargo-build-sbf` to install a new version. The freshly updated cargo-build-sbf may not be in use if the old Solana CLI installation directory has priority on the PATH variable.
+                 This is the rustc version that ships with Solana tools and not your system's rustc version. Use `cargo install cargo-build-sbf` to install the latest version. Ensure that the new cargo-build-sbf is used by placing the cargo install directory (typically `~/.cargo/bin`) before the Solana CLI installation directory (typically `~/.local/share/solana/install/active_release/bin`) on the `PATH` variable.
   too_new_child@0.0.1 requires rustc 1.2345.0
   too_new_parent@0.0.1 requires rustc 1.2345.0
 Either upgrade rustc or select compatible dependency versions with

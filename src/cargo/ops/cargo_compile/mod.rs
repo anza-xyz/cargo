@@ -649,9 +649,11 @@ pub fn create_bcx<'a, 'gctx>(
                 "rustc {rustc_version} is not supported by the following package{plural}:\n
                  This is the rustc version that ships with Solana tools and \
                  not your system's rustc version. Use `cargo install cargo-build-sbf` \
-                 to install a new version. The freshly updated cargo-build-sbf \
-                 may not be in use if the old Solana CLI installation directory has priority \
-                 on the PATH variable.\n",
+                 to install the latest version. Ensure that the new cargo-build-sbf is used \
+                 by placing the cargo install directory (typically `~/.cargo/bin`) before the \
+                 Solana CLI installation directory \
+                 (typically `~/.local/share/solana/install/active_release/bin`) \
+                 on the `PATH` variable.\n",
             );
             incompatible.sort_by_key(|(unit, _)| (unit.pkg.name(), unit.pkg.version()));
             for (unit, msrv) in incompatible {
