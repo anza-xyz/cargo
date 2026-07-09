@@ -3019,7 +3019,7 @@ To reuse those artifacts with a future compilation, set the environment variable
 Caused by:
   rustc [..] is not supported by the following package:
 
-                   Note that this is the rustc version that ships with Solana tools and not your system's rustc version. Use `agave-install update` or head over to https://docs.anza.xyz/cli/install to install a newer version.
+                   This is the rustc version that ships with Solana tools and not your system's rustc version. Use `cargo install cargo-build-sbf` to install the latest version. Ensure that the new cargo-build-sbf is used by placing the cargo install directory (typically `~/.cargo/bin`) before the Solana CLI installation directory (typically `~/.local/share/solana/install/active_release/bin`) on the `PATH` variable.
     some-package-from-the-distant-future@0.1.0 requires rustc 1.2345.0
 
 "#]])
